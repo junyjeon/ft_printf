@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:51:29 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/09/23 17:29:10 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/09/23 19:19:12 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,43 +34,58 @@ int	sum(int num_args, ...)
 	return (res);
 }
 
-void	ft_i(int args, va_list ap, int ans)
+void	ft_putnbf(int n)
 {
-	if (ans < 0)
+	if (n == -2147483648)
+		write(1, "-2147483648", 11);
+	else if (n < 0)
 	{
 		write(1, "-", 1);
-		ans *= -1;
+		n = -n;
 	}
-	while (args)
-	{
-		args /= 10;
-		write(1, &"0123456789"[args % 10], 1);
-	}
+	if (n >= 10)
+		ft_putnbr(n / 10);
+	if (n >= 0)
+		write(1, &"0123456789"[n % 10], 1);
 }
 
-void	ft_d(int args, va_list ap, int ans)
+void	ft_X(int args, va_list ap, int n)
 {
-	while (ans)
-	{
-		write(1, &"0123456789"[ans % 10], 1);
-		ans /= 10;
-	}
+	if (n > 15)
+		ft_X(args, ap, n / 16);
+	write(1, &"0123456789ABCDEF"[n % 16], 1);
 }
 
-void	ft_p(int args, va_list ap, char *ans)
+void	ft_x(int args, va_list ap, int n)
 {
-	int		ans_len;
-	int		i;
+	if (n > 15)
+		ft_x(args, ap, n / 16);
+	write(1, &"0123456789abcdef"[n % 16], 1);
+}
 
-	ans_len = ft_strlen(ans);
-	i = 0;
-	
-	while (i < ans_len) 
-	{
-		write(1, &"0123456789abcdef"[ans[i] / 16], 1);
-		write(1, &"0123456789abcdef"[ans[i] % 16], 1);
-	}
-	
+void	ft_u(int args, va_list ap, unsigned int n)
+{
+	if (n >= 10)
+		ft_putnbr(n / 10);
+	if (n >= 0)
+		write(1, &"0123456789"[n % 10], 1);
+}
+
+void	ft_i(int args, va_list ap, int n)
+{
+	ft_putnbf(n);
+}
+
+void	ft_d(int args, va_list ap, int n)
+{
+	ft_putnbf(n);
+}
+
+void	ft_p(int args, va_list ap, unsigned long long n)
+{
+	if (n > 15)
+		ft_p(args, ap, n / 16);
+	write(1, &"0123456789abcdef"[n % 16], 1);
 }
 
 void	ft_s(int args, va_list ap, char *ans)
@@ -86,10 +101,8 @@ void	ft_c(int args, va_list ap, char ans)
 char	*ft_printf(char *args, ...)
 {
 	va_list	ap;
-//ft_printf("%c", a);
-	va_start(ap, args);
-	int ans = 0;
 
+	va_start(ap, args);
 	while (*args)
 	{
 		if (*args == '%')
@@ -109,15 +122,16 @@ char	*ft_printf(char *args, ...)
 			else if (args == 'i')
 				ft_i(args, ap, va_arg(ap, int))
 			else if (args == 'u')
-			
+				ft_u(args, ap, va_arg(ap, unsigned int));
 			else if (args == 'x')
-			
+				ft_x(args, ap, va_arg(ap, unsigned int));
 			else if (args == 'X')	
-			
+				ft_X(args, ap, va_arg(ap, unsigned int));
 			else if (args == '%')
+				write(1, "%", 1);
 		}
 		else
-			write(1, &args[i], 1);
+			write(1, &args, 1);
 		args++;
 	}
 	va_end(ap);
