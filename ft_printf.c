@@ -6,13 +6,11 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:51:29 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/09/27 09:01:04 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/09/27 09:02:01 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-//args에 +가 있으면? 아님 reverstrim처럼 사이에 있으면? strchr로 찾아서 아래 함수 수행 후 다음 반복문 들어가기.
 
 char	*ft_printf(char *format, ...)
 {
