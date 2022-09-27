@@ -4,17 +4,19 @@
 #include <unistd.h>
 #include <limits.h>
 
+#include "ft_printf.h"
+
 int main(void)
 {
 	int i;
 	int j;
 
-	printf("%% test");
-	printf("f %%%%, [%%]\n");
-	printf("f %%5%%, [%5%]\n");
-	printf("f %%-5%%, [%-5%]\n");
-	printf("f %%05%%, [%05%]\n");
-	printf("f %%-05%%, [%-05%]\n");
+	ft_printf("%% test");
+	ft_printf("f %%%%, [%%]\n");
+	ft_printf("f %%5%%, [%5%]\n");
+	ft_printf("f %%-5%%, [%-5%]\n");
+	ft_printf("f %%05%%, [%05%]\n");
+	ft_printf("f %%-05%%, [%-05%]\n");
 
 	printf("id basic test n width test \n");
 	printf("f %%i = 2147483647, [%i]\n", 2147483647);
