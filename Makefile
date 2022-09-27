@@ -6,11 +6,11 @@
 #    By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/12 21:52:21 by junyojeo          #+#    #+#              #
-#    Updated: 2022/09/27 08:59:06 by junyojeo         ###   ########.fr        #
+#    Updated: 2022/09/27 09:03:46 by junyojeo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	ft_printf.a
+NAME	=	libftprintf.a
 SRC		=	ft_printf.c print_hex.c print_num.c print_str.c
 OBJ		=	${SRC:.c=.o}
 CC		=	cc

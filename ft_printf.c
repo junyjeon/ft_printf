@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:51:29 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/09/27 09:02:01 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/09/27 09:06:38 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,11 @@ char	*ft_printf(char *format, ...)
 		i++;
 	}
 	va_end(ap);
+	return (0);
+}
+
+int main(void)
+{
+	ft_printf("%%");
 	return (0);
 }
