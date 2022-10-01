@@ -12,47 +12,34 @@
 
 #include "ft_printf.h"
 
-static int	nbrlen(int n)
+static int	ft_putnbr(int n)
 {
-	int	len;
-	
-	len = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-	{
-		n *= -1;
-		len++;
-	}
-	while (n > 0)
-	{
-		n /= 10;
-		len++;
-	}
-	return (len);
-}
+	static int	len;
 
-static void	ft_putnbr(int n)
-{
+	len = 0;
 	if (n == -2147483648)
-		write(1, "-2147483648", 11);
+		len = write(1, "-2147483648", 11);
 	else if (n < 0)
 	{
-		write(1, "-", 1);
+		len += write(1, "-", 1);
 		n = -n;
 	}
 	if (n >= 10)
 		ft_putnbr(n / 10);
 	if (n >= 0)
-		write(1, &"0123456789"[n % 10], 1);
+		len += write(1, &"0123456789"[n % 10], 1);
+	return (len);
 }
 
-static void	ft_u(unsigned int n)
+static int	ft_u(unsigned int n)
 {
+	static int	len;
+
+	len = 0;
 	if (n >= 10)
 		ft_u(n / 10);
-	if (n >= 0)
-		write(1, &"0123456789"[n % 10], 1);
+	len += write(1, &"0123456789"[n % 10], 1);
+	return (len);
 }
 
 int	print_num(char args, va_list ap)
@@ -61,14 +48,8 @@ int	print_num(char args, va_list ap)
 
 	n = va_arg(ap, int);
 	if (args == 'd' || args == 'i')
-	{
-		ft_putnbr(n);
-		return (nbrlen(n));
-	}
+		return (ft_putnbr(n));
 	else if (args == 'u')
-	{
-		ft_u((unsigned int)n);
-		return (nbrlen(n));
-	}
+		return (ft_u((unsigned int)n));
 	return (0);
 }
