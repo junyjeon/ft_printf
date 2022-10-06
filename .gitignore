@@ -1,0 +1,8 @@
+.vscode
+.DS_Store
+*.swp
+*.txt
+*.out
+*.md
+test.cpp
+printf_test.c

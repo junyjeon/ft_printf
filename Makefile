@@ -11,13 +11,13 @@
 # **************************************************************************** #
 
 NAME	=	libftprintf.a
-SRC		=	ft_printf.c print_hex.c print_num.c print_str.c
-OBJ		=	${SRC:.c=.o}
-CC		=	cc
+
 CFLAGS	=	-Wall -Wextra -Werror
 
-all:	$(NAME)
+SRC		=	ft_printf.c print_hex.c print_num.c print_str.c
+OBJ		=	${SRC:.c=.o}
 
+all:	$(NAME)
 $(NAME) : $(OBJ)
 	ar rc $@ $^
 
@@ -26,10 +26,8 @@ $(NAME) : $(OBJ)
 
 clean:
 	rm -f $(OBJ)
-
 fclean: clean
 	rm -f $(NAME)
-
 re: fclean all
 
-.PHONY : all .c.o clean fclean re bonus
+.PHONY : all clean fclean re bonus

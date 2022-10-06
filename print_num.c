@@ -12,11 +12,8 @@
 
 #include "ft_printf.h"
 
-static int	ft_putnbr(int n)
+static int	put_di(int n, int len)
 {
-	static int	len;
-
-	len = 0;
 	if (n == -2147483648)
 		len = write(1, "-2147483648", 11);
 	else if (n < 0)
@@ -25,19 +22,16 @@ static int	ft_putnbr(int n)
 		n = -n;
 	}
 	if (n >= 10)
-		ft_putnbr(n / 10);
+		put_di(n / 10, len);
 	if (n >= 0)
 		len += write(1, &"0123456789"[n % 10], 1);
 	return (len);
 }
 
-static int	ft_u(unsigned int n)
+static int	put_u(unsigned int n, int len)
 {
-	static int	len;
-
-	len = 0;
 	if (n >= 10)
-		ft_u(n / 10);
+		put_u(n / 10, len);
 	len += write(1, &"0123456789"[n % 10], 1);
 	return (len);
 }
@@ -48,8 +42,6 @@ int	print_num(char args, va_list ap)
 
 	n = va_arg(ap, int);
 	if (args == 'd' || args == 'i')
-		return (ft_putnbr(n));
-	else if (args == 'u')
-		return (ft_u((unsigned int)n));
-	return (0);
+		return (put_di(n, 0));
+	return (put_u((unsigned int)n, 0));
 }

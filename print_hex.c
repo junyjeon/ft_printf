@@ -12,60 +12,33 @@
 
 #include "ft_printf.h"
 
-static int	hexlen(char args, unsigned long long n)
+static int	put_Xx(char format, unsigned int n, int len)
 {
-	int	len;
-
-	if (args == 'p')
-		len = 2;
-	else
-		len = 0;
-	if (n == 0)
-		return (++len);
-	while (n > 0)
-	{
-		n /= 16;
-		len++;
-	}
+	if (n > 15)
+		put_Xx(format, n / 16, len);
+	if (format == 'x')
+		len += write(1, &"0123456789abcdef"[n % 16], 1);
+	else if (format == 'X')
+		len += write(1, &"0123456789ABCDEF"[n % 16], 1);
 	return (len);
 }
 
-static void	ft_X(int args, int n)
+static int	put_p(unsigned long long n, int len)
 {
 	if (n > 15)
-		ft_X(args, n / 16);
-	write(1, &"0123456789ABCDEF"[n % 16], 1);
+		put_p(n / 16, len);
+	len += write(1, &"0123456789abcdef"[n % 16], 1);
+	return (len);
 }
 
-static void	ft_x(int args, int n)
+int	print_hex(char format, va_list ap)
 {
-	if (n > 15)
-		ft_x(args, n / 16);
-	write(1, &"0123456789abcdef"[n % 16], 1);
-}
-
-static void	ft_p(int args, unsigned long long n)
-{
-	if (n > 15)
-		ft_p(args, n / 16);
-	write(1, &"0123456789abcdef"[n % 16], 1);
-}
-
-int	print_hex(char args, va_list ap)
-{
-	unsigned long long	hex;
-
-	hex = (unsigned long long)va_arg(ap, void *);
-	if (!hex)
-		return (0);
-	if (args == 'p')
+	if (format == 'X' || format == 'x')
+		return (put_Xx(format, (unsigned long long)va_arg(ap, int), 0));
+	else if (format == 'p')
 	{
 		write(1, "0x", 2);
-		ft_p(args, hex);
+		return (put_p((unsigned long long)va_arg(ap, void *), 2));
 	}
-	else if (args == 'x')
-		ft_x(args, hex);
-	else if (args == 'X')
-		ft_X(args, hex);
-	return (hexlen(args, hex));
+	return (0);
 }

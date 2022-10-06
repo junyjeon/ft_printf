@@ -12,38 +12,29 @@
 
 #include "ft_printf.h"
 
-static size_t	ft_strlen(const char *str)
-{	
-	size_t	i;
-
-	i = 0;
-	if (str)
-	{
-		while (str[i])
-			i++;
-	}
-	return (i);
+static int	ft_c(char c)
+{
+	return (write(1, &c, 1));
 }
 
 static int	ft_s(char *str)
 {
-	write(1, str, ft_strlen(str));
-	return (0);
+	int i;
+
+	i = 0;
+	if (str)
+		while (str[i])
+			i++;
+	return (write(1, str, i));
 }
 
-static int	ft_c(char c)
+int	print_str(char format, va_list ap)
 {
-	write(1, &c, 1);
-	return (0);
-}
-
-int	print_str(char args, va_list ap)
-{
-	if (args == 'c')
-		return (ft_c(va_arg(ap, int)));
-	else if (args == 's')
+	if (format == 's')
 		return (ft_s(va_arg(ap, char *)));
-	else if (args == '%')
+	else if (format == 'c')
+		return (ft_c(va_arg(ap, int)));
+	else if (format == '%')
 		return (ft_c('%'));
 	return (0);
 }

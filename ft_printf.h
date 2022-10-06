@@ -17,10 +17,9 @@
 #include <unistd.h>
 #include <stdarg.h>
 
-
 int		print_str(char args, va_list ap);
 int		print_num(char args, va_list ap);
 int		print_hex(char args, va_list ap);
-char	*ft_printf(char *args, ...);
+int		ft_printf(const char *format, ...);
 
 #endif
