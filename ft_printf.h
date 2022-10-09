@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 22:00:00 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/09/27 08:14:44 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/06 20:22:24 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 int		print_str(char args, va_list ap);
 int		print_num(char args, va_list ap);
 int		print_hex(char args, va_list ap);
-int		ft_printf(const char *format, ...);
+int		ft_printf(const char *args, ...);
 
 #endif

@@ -6,45 +6,46 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:51:29 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/09/27 09:06:38 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/09 22:03:42 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_printf(const char *args, ...)
 {
 	va_list	ap;
-	int		i;
 	int		len;
+	int		i;
 
-	va_start(ap, format);
+	va_start(ap, args);
 	len = 0;
 	i = 0;
-	while (format[i])
+	while (args[i])
 	{
-		if (format[i] == '%')
+		if (args[i] == '%')
 		{
 			i++;
-			if (!format[i])
+			if (!args[i])
 				break ;
-			if (format[i] == 'c' || format[i] == 's' || format[i] == '%')
-				len += print_str(format[i], ap);
-			else if (format[i] == 'd' || format[i] == 'i' || format[i] == 'u')
-				len += print_num(format[i], ap);
-			else if (format[i] == 'p' || format[i] == 'x' || format[i] == 'X')
-				len += print_hex(format[i], ap);
+			else if (args[i] == 'c' || args[i] == 's' || args[i] == '%')
+				len += print_str(args[i], ap);
+			else if (args[i] == 'd' || args[i] == 'i' || args[i] == 'u')
+				len += print_num(args[i], ap);
+			else if (args[i] == 'p' || args[i] == 'x' || args[i] == 'X')
+				len += print_hex(args[i], ap);
 		}
 		else
-			len += write(1, &format[i], 1);
+			len += write(1, &args[i], 1);
 		i++;
 	}
 	va_end(ap);
 	return (len);
 }
-
+// #include <stdio.h>
 // int main(void)
 // {
-// 	ft_printf("%%");
+// 	ft_printf("abcde");
+// 	printf("abcde");
 // 	return (0);
 // }
