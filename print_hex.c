@@ -6,39 +6,59 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 06:19:47 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/10/06 20:22:34 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:33:33 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	put_Xx(char args, unsigned int n, int len)
+static int	hexlen(unsigned int hex, int h_len)
 {
-	if (n > 15)
-		put_Xx(args, n / 16, len);
-	if (args == 'x')
-		len += write(1, &"0123456789abcdef"[n % 16], 1);
-	else if (args == 'X')
-		len += write(1, &"0123456789ABCDEF"[n % 16], 1);
-	return (len);
+	unsigned int	hex_p;
+
+	if ()
+		unsigned int hex_p;
+	if (hex == 0)
+		return (++h_len);
+	while (hex)
+	{
+		hex /= 16;
+		h_len++;
+	}
+	return (h_len);
 }
 
-static int	put_p(unsigned long long n, int len)
+static void	put_p(unsigned long long hex)
 {
-	if (n > 15)
-		put_p(n / 16, len);
-	len += write(1, &"0123456789abcdef"[n % 16], 1);
-	return (len);
+	if (hex > 15)
+		put_p(hex / 16);
+	write(1, &"0123456789abcdef"[hex % 16], 1);
 }
 
-int	print_hex(char args, va_list ap)
+static void	put_Xx(char arg, unsigned int hex)
 {
-	if (args == 'X' || args == 'x')
-		return (put_Xx(args, (unsigned long long)va_arg(ap, int), 0));
-	else if (args == 'p')
+	if (hex > 15)
+		put_Xx(arg, hex / 16);
+	if (arg == 'x')
+		write(1, &"0123456789abcdef"[hex % 16], 1);
+	else if (arg == 'X')
+		write(1, &"0123456789ABCDEF"[hex % 16], 1);
+}
+
+int	print_hex(char arg, va_list ap)
+{
+	unsigned long long	hex;
+
+	hex = (unsigned long long)va_arg(ap, void *);
+	if (arg == 'X' || arg == 'x')
+	{
+		put_Xx(arg, hex);
+		return (hexlen(hex, 0));
+	}
+	else
 	{
 		write(1, "0x", 2);
-		return (put_p((unsigned long long)va_arg(ap, void *), 2));
+		put_p(hex);
+		return (hexlen(hex, 2));
 	}
-	return (0);
 }

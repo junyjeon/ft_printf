@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 07:31:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/10/06 20:22:48 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/13 18:12:06 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,19 @@ static int	ft_s(char *str)
 	int i;
 
 	i = 0;
-	if (str)
-		while (str[i])
-			i++;
+	if (!str)
+		str = "(null)";
+	while (str[i])
+		i++;
 	return (write(1, str, i));
 }
 
-int	print_str(char args, va_list ap)
+int	print_str(char arg, va_list ap)
 {
-	if (args == 's')
+	if (arg == 's')
 		return (ft_s(va_arg(ap, char *)));
-	else if (args == 'c')
+	else if (arg == 'c')
 		return (ft_c(va_arg(ap, int)));
-	else if (args == '%')
+	else
 		return (ft_c('%'));
-	return (0);
 }

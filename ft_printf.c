@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:51:29 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/10/09 22:03:42 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/13 19:16:06 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,41 @@
 int	ft_printf(const char *args, ...)
 {
 	va_list	ap;
-	int		len;
 	int		i;
+	int		len;
 
-	va_start(ap, args);
+	i = -1;
 	len = 0;
-	i = 0;
-	while (args[i])
+	va_start(ap, args);
+	while (args[++i])
 	{
-		if (args[i] == '%')
+		if (args[i++] == '%')
 		{
-			i++;
-			if (!args[i])
-				break ;
-			else if (args[i] == 'c' || args[i] == 's' || args[i] == '%')
+			if (args[i] == 'c' || args[i] == 's' || args[i] == '%')
 				len += print_str(args[i], ap);
 			else if (args[i] == 'd' || args[i] == 'i' || args[i] == 'u')
 				len += print_num(args[i], ap);
 			else if (args[i] == 'p' || args[i] == 'x' || args[i] == 'X')
 				len += print_hex(args[i], ap);
+			else
+				return (-1);
 		}
 		else
-			len += write(1, &args[i], 1);
-		i++;
+			len += write(1, &args[--i], 1);
 	}
 	va_end(ap);
 	return (len);
 }
+
 // #include <stdio.h>
 // int main(void)
 // {
-// 	ft_printf("abcde");
-// 	printf("abcde");
+// 	int i = 0;
+// 	int *p = 17;
+	
+// 	i = ft_printf("|%d|\n", -2147483640);
+// 	printf("%d\n", i);
+// 	printf("%p\n", p);
+// 	printf("%x\n", 17);
 // 	return (0);
 // }
