@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:51:29 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/10/13 19:16:06 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:46:13 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,3 @@ int	ft_printf(const char *args, ...)
 	va_end(ap);
 	return (len);
 }
-
-// #include <stdio.h>
-// int main(void)
-// {
-// 	int i = 0;
-// 	int *p = 17;
-	
-// 	i = ft_printf("|%d|\n", -2147483640);
-// 	printf("%d\n", i);
-// 	printf("%p\n", p);
-// 	printf("%x\n", 17);
-// 	return (0);
-// }

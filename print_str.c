@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 07:31:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/10/13 18:12:06 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/13 22:48:12 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_c(char c)
 
 static int	ft_s(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
