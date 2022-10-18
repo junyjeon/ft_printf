@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 07:36:01 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/10/13 19:12:26 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/18 17:07:45 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,38 +32,49 @@ static int	nbrlen(long n)
 	return (n_len);
 }
 
-static void	put_di(int n)
+static bool	put_di(int n)
 {
 	if (n == -2147483648)
-		write(1, "-2147483648", 11);
+	{
+		if (!write(1, "-2147483648", 11))
+			return (false);
+	}
 	else if (n < 0)
 	{
-		write(1, "-", 1);
+		if (!write(1, "-", 1))
+			return (false);
 		n *= -1;
 	}
 	if (n > 9)
 		put_di(n / 10);
 	if (n >= 0)
-		write(1, &"0123456789"[n % 10], 1);
+		if (!write(1, &"0123456789"[n % 10], 1))
+			return (false);
+	return (true);
 }
 
-static void	put_u(unsigned int n)
+static bool	put_u(unsigned int n)
 {
 	if (n > 9)
 		put_u(n / 10);
-	write(1, &"0123456789"[n % 10], 1);
+	if (!write(1, &"0123456789"[n % 10], 1))
+		return (false);
+	return (true);
 }
 
-int	print_num(char arg, va_list ap)
+bool	print_num(char arg, va_list ap, int *out)
 {
 	int	n;
 
 	n = va_arg(ap, int);
 	if (arg == 'd' || arg == 'i')
 	{
-		put_di(n);
-		return (nbrlen(n));
+		if (!put_di(n))
+			return (false);
 	}
-	put_u((unsigned int)n);
-	return (nbrlen((unsigned int)n));
+	else
+		if (!put_u(n))
+			return (false);
+	*out = nbrlen(n);
+	return (true);
 }

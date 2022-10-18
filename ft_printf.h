@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 22:00:00 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/10/13 22:48:42 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/18 17:06:19 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <stdbool.h>
 
-int		print_str(char args, va_list ap);
-int		print_num(char args, va_list ap);
-int		print_hex(char args, va_list ap);
+bool	print_str(char arg, va_list ap);
+bool	print_num(char args, va_list ap);
+bool	print_hex(char args, va_list ap);
 int		ft_printf(const char *args, ...);
 
 #endif
