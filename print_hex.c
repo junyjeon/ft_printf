@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 06:19:47 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/10/18 17:07:42 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:22:09 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static bool	put_p(unsigned long long hex)
 	if (!write(1, &"0123456789abcdef"[hex % 16], 1))
 		return (false);
 	return (true);
-	
 }
 
 static bool	put_x(char arg, unsigned int hex)

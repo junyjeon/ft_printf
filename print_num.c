@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 07:36:01 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/10/18 17:07:45 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/18 21:19:07 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static bool	put_di(int n)
 	{
 		if (!write(1, "-2147483648", 11))
 			return (false);
+		return (true);
 	}
 	else if (n < 0)
 	{
@@ -47,9 +48,8 @@ static bool	put_di(int n)
 	}
 	if (n > 9)
 		put_di(n / 10);
-	if (n >= 0)
-		if (!write(1, &"0123456789"[n % 10], 1))
-			return (false);
+	if (!write(1, &"0123456789"[n % 10], 1))
+		return (false);
 	return (true);
 }
 
@@ -71,10 +71,13 @@ bool	print_num(char arg, va_list ap, int *out)
 	{
 		if (!put_di(n))
 			return (false);
+		*out = nbrlen(n);
 	}
 	else
+	{
 		if (!put_u(n))
 			return (false);
-	*out = nbrlen(n);
+		*out = nbrlen((unsigned int)n);
+	}
 	return (true);
 }

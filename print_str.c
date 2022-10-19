@@ -6,7 +6,7 @@
 /*   By: junyojeo <junyojeo@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 07:31:14 by junyojeo          #+#    #+#             */
-/*   Updated: 2022/10/18 17:07:53 by junyojeo         ###   ########.fr       */
+/*   Updated: 2022/10/18 21:19:01 by junyojeo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,16 @@ static bool	ft_s(char *str, int *out)
 
 	i = 0;
 	if (!str)
+	{
 		str = "(null)";
+		*out = 0;
+	}
+	if (*str == '\0')
+	{
+		str = "";
+		*out = 0;
+		return (true);
+	}
 	while (str[i])
 		i++;
 	if (!write(1, str, i))
