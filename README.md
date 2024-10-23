@@ -63,11 +63,11 @@ int ft_printf(const char *format, ...)
     va_end(args);
     return (count);
 }
-````
+```
 
 
 ### 2. 서식 지정자 처리
-````c
+```c
 static int handle_format(char specifier, va_list args)
 {
     if (specifier == 'c')
@@ -86,7 +86,7 @@ static int handle_format(char specifier, va_list args)
         return (print_char('%'));
     return (0);
 }
-````
+```
 
 
 ## 📝 상세 구현 가이드
