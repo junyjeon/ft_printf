@@ -4,8 +4,9 @@
 
   <img src="assets/04_ft_printf_review.jpg" alt="ft_printf Evaluation" width="800">
 
-  [![42 Score](https://img.shields.io/badge/Score-100%2F100-success?style=for-the-badge&logo=42)](https://github.com/your-username/ft_printf)
+  [![42 Score](https://img.shields.io/badge/Score-100%2F100-success?style=for-the-badge&logo=42)](https://github.com/junyjeon/ft_printf)
   [![Norminette](https://img.shields.io/badge/Norminette-passing-brightgreen?style=for-the-badge)](https://github.com/42School/norminette)
+  [![C](https://img.shields.io/badge/C-99-blue.svg?style=for-the-badge&logo=c)](https://github.com/junyjeon/ft_printf)
 </div>
 
 ## 📋 목차
